@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulário de teste — Contato sem E-mail</title>
+<style>
+  body {
+    font-family: -apple-system, Arial, sans-serif;
+    max-width: 480px;
+    margin: 60px auto;
+    padding: 0 20px;
+    color: #1a1a1a;
+  }
+  h1 { font-size: 22px; }
+  p.intro { color: #555; font-size: 14px; line-height: 1.5; }
+  form { margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
+  label { font-size: 13px; font-weight: 600; }
+  input {
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  small { color: #888; font-size: 12px; }
+  button {
+    margin-top: 8px;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    background: #00c8ea;
+    color: #012233;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  button:hover { opacity: 0.9; }
+  #msg { color: #c8102e; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<h1>Formulário de teste</h1>
+<p class="intro">Página de teste para validar a captura de Lead por telefone (Contato sem E-mail) em Formulários Integrados. Preencha e-mail ou telefone no formato E.164.</p>
+
+<form id="form-teste" name="form-teste">
+  <div>
+    <label for="nome">Nome</label><br>
+    <input type="text" id="nome" name="nome" placeholder="Seu nome">
+  </div>
+
+  <div>
+    <label for="email">E-mail</label><br>
+    <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com">
+  </div>
+
+  <div>
+    <label for="phone">Telefone principal</label><br>
+    <input type="tel" id="phone" name="phone" placeholder="+5511999998888" pattern="^\+[1-9]\d{6,14}$">
+    <br><small>Formato E.164, ex: +5511999998888</small>
+  </div>
+
+  <button type="submit">Enviar</button>
+  <p id="msg" role="status"></p>
+</form>
+
+<script>
+  document.getElementById('form-teste').addEventListener('submit', function (e) {
+    var email = document.getElementById('email').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var msg = document.getElementById('msg');
+
+    if (!email && !phone) {
+      e.preventDefault();
+      msg.textContent = 'Preencha e-mail ou telefone no formato E.164 antes de enviar.';
+      return;
+    }
+    if (phone && !/^\+[1-9]\d{6,14}$/.test(phone)) {
+      e.preventDefault();
+      msg.textContent = 'Telefone fora do padrão E.164. Ex: +5511999998888';
+      return;
+    }
+    msg.textContent = '';
+  });
+</script>
+
+<!-- Código de monitoramento RD Station Marketing -->
+<script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/ef813e17-9cf9-4c14-8809-0c9fe8af936f-loader.js"></script>
+
+</body>
+</html>
